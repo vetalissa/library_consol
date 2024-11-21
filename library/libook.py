@@ -12,12 +12,12 @@ class Book:
         cls.__id += 1
         return super().__new__(Book)
 
-    def __init__(self, title: str, author: str, year: str):
+    def __init__(self, title: str, author: str, year: str, status: str = "В наличии"):
         self.id = self.__id
         self.title = title.capitalize()
         self.author = author.title()
         self.year = year
-        self.status = "В наличии"
+        self.status = status
 
     def __setattr__(self, key, value):
         """ Проверка корректности атрибута 'year'. """
@@ -44,9 +44,9 @@ class Library:
     def __init__(self):
         self.library = {}
 
-    def add_book(self, title: str, author: str, year: str) -> Book:
+    def add_book(self, title: str, author: str, year: str, status: str = "В наличии") -> Book:
         """ Создание и Добавление новых книг. """
-        book = Book(title, author, year)
+        book = Book(title, author, year, status)
         self.library[book.id] = book
         return book
 

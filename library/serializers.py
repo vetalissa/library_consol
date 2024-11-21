@@ -22,9 +22,10 @@ def load_json_library(library: Library):
         book_title = book['title']
         book_author = book['author']
         book_year = book['year']
+        book_status = book['status']
 
         # Создаем экземпляр класса Book и добавляем в Library
-        library.add_book(book_title, book_author, book_year)
+        library.add_book(book_title, book_author, book_year, book_status)
 
 
 def add_json_library(book_instance: Book):
