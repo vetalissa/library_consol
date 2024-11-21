@@ -87,9 +87,9 @@ class Library:
     def check_status(status: str) -> str:
         """ Проверка правильного значения для "status". """
         if 'в наличии' == status.lower():
-            status = '"В наличии"'
+            status = 'В наличии'
         elif 'выдана' == status.lower():
-            status = ' Выдана'
+            status = 'Выдана'
         else:
             raise ValueError
         return status

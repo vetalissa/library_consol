@@ -134,6 +134,8 @@ def library_update_book():
             status = library.check_status(input_status)  # Проверка корректности status
             answer_update = library.update_book(id_book, status)  # Обновление статуса
 
+            serializers.update_json_library(id_book, status) # Изменение статуса книги в файле data.json
+
 
             print(answer_update)  # Вывод обновленной книги
             print('_' * 165)

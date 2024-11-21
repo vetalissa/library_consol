@@ -46,6 +46,15 @@ def update_json_library(id_book: int, status: str):
     """
     Обновление статуса у книги в json.
     """
+    try:
+        data = unloading_json()  # Выгружаем данные из файла
+        data[str(id_book)]['status'] = status  # Меняем статус
+
+        # Запись в json
+        loading_in_json(data)
+
+    except json.JSONDecodeError as e:
+        print(f"Ошибка при обработке JSON: {e}")
 
 
 def delete_json_library(id_book: int):
