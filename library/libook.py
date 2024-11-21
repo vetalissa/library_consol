@@ -85,8 +85,11 @@ class Library:
         count_search = 0  # Счетчик найденных книг
 
         for i in self.library.values():
-            if search in i.display_book():
-                print('поиск:', i)
+            if search.lower() in i.display_book():
+                print(
+                    f'{str(i.id).ljust(5)}|{i.title.ljust(70)}|{i.author.ljust(50)}' +
+                    f'|{i.year.ljust(10)}|{i.status.ljust(20)}|')
+                print('_' * 165)
                 count_search += 1
 
         return count_search
