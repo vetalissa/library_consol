@@ -4,6 +4,8 @@ import serializers
 library = Library()
 
 print('Загружаем библиотеку...\nОжидайте...')
+
+# Выгружаем из файла data.json все книги
 serializers.load_json_library(library)
 
 command = '''Список команд:                                                                                                                                        
@@ -40,6 +42,8 @@ def library_add_book():
         else:
             book = library.add_book(book_val['book_title'][1], book_val['book_author'][1],
                                     book_val['book_year'][1])
+
+            serializers.add_json_library(book) # Добавление в файл data.json новой книги
 
             print('_' * 165)
             print(f'{book}\nКнига успешна добавлена в библиотеку.')

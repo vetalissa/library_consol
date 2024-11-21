@@ -31,6 +31,15 @@ def add_json_library(book_instance: Book):
     """
     Добавление книг в json.
     """
+    try:
+        data = unloading_json()  # Выгружаем данные из файла
+        data[book_instance.id] = book_instance.__dict__
+
+        # Записываем в файл
+        loading_in_json(data)
+
+    except json.JSONDecodeError as e:
+        print(f"Ошибка при обработке JSON: {e}")
 
 
 def update_json_library(id_book: int, status: str):
@@ -61,4 +70,3 @@ def loading_in_json(data):
     """
     with open('data.json', 'w') as json_data:
         json.dump(data, json_data, ensure_ascii=False, indent=4)
-
