@@ -78,6 +78,8 @@ def library_remove_book():
 
         book = library.delete_book(id_book=id_book)
 
+        serializers.delete_json_library(id_book) # Удаление из файла data.json книги
+
 
         print('_' * 165)
         print(f'Книга: {book}\nБыла успешна удалена!')

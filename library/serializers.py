@@ -52,6 +52,17 @@ def delete_json_library(id_book: int):
     """
     Удаление книги из json.
     """
+    try:
+        data = unloading_json()  # Выгружаем данные из файла
+
+        # Удаление книги
+        del data[str(id_book)]
+
+        # Запись в json
+        loading_in_json(data)
+
+    except json.JSONDecodeError as e:
+        print(f"Ошибка при обработке JSON: {e}")
 
 
 def unloading_json() -> dict:
