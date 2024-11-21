@@ -90,6 +90,50 @@ def library_update_book():
     """
     global command_text, yes_or_no
 
+    # Флаги позволяющие вводить поочередно id, а после status.
+    f1 = False
+    f2 = False
+
+    while f1 != True:
+        # Будем вводить id пока не решим выйти("Меню") или не введем достоверный id.
+        try:
+            input_id_book = input('Напишите индекс(номер) книги у которой хотите изменить статус\n')
+
+            if input_id_book == 'МЕНЮ':  # Выход в меню
+                command_text = 'МЕНЮ'
+                return False
+
+            id_book = library.check_id_book(input_id_book)  # Проверка корректности id
+            f1 = True  # Меняем флаг, для перехода к следующему input нового статуса
+
+        except KeyError:
+            print(
+                f'Индекс {input_id_book} отсутствует у нас в библиотеке.\nПопробуйте ввести другой индекс и/или проверьте его в библиотеке.')
+        except ValueError:
+            print(f'Неверно указан индекс! "{input_id_book}" не является числом!')
+
+    while f2 != True and f1 == True:
+        # Будем вводить status пока не введем достоверный id или не решим выйти("Меню").
+        try:
+            input_status = input('Напишите новый статус, он может быть только "В наличии" или "Выдана"\n')
+
+            if input_status == 'МЕНЮ':  # Выход в меню
+                command_text = 'МЕНЮ'
+                return False
+
+            status = library.check_status(input_status)  # Проверка корректности status
+            answer_update = library.update_book(id_book, status)  # Обновление статуса
+
+
+            print(answer_update)  # Вывод обновленной книги
+            print('_' * 165)
+
+            f2 = True
+            yes_or_no = input('Изменить ещё статус?(Да/Нет)\n')
+
+        except ValueError:
+            print(f'Статус указан неверно! Укажите правильно: "В наличии" или "Выдана"')
+
 
 def library_search_book():
     """
