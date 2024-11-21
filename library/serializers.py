@@ -1,4 +1,5 @@
 import json
+
 from libook import Book, Library
 
 
@@ -8,14 +9,16 @@ def create_json_library():
     Если у вас нет, файла json c книгами, вы можете создать пустой.
     И с помощью консоли и команды "Добавить" заполнить библиотеку.
     """
-    with open('data.json', 'w', encoding='utf-8') as file_data:
-        json.dump({}, file_data, ensure_ascii=False, indent=4)
+
+    with open('data.json', 'w', encoding='utf-8') as json_data:
+        json.dump({}, json_data, ensure_ascii=False, indent=4)
 
 
 def load_json_library(library: Library):
     """
     Загрузка книг из json.
     """
+
     data = unloading_json()  # Выгружаем данные из файла
 
     for book in data.values():

@@ -21,15 +21,18 @@ class Book:
 
     def __setattr__(self, key, value):
         """ Проверка корректности атрибута 'year'. """
+
         if key == 'year':
             if not all(val.isdigit() for val in value):
                 print('_' * 165)
                 print("Неверный год, он может быть с 1445 по наше время и только цифры!")
                 raise TypeError
+
             if 1445 > int(value) or int(value) > datetime.now().year:
                 print('_' * 165)
                 print("Неверный год, он может быть с 1445 по наше время.")
                 raise TypeError
+
         object.__setattr__(self, key, value)
 
     def __str__(self):
@@ -51,36 +54,46 @@ class Library:
 
     def add_book(self, title: str, author: str, year: str, status: str = "В наличии") -> Book:
         """ Создание и Добавление новых книг. """
+
         book = Book(title, author, year, status)
         self.library[book.id] = book
         return book
 
     def delete_book(self, id_book: int) -> Book:
+        """ Удаление книги. """
         book = self.library[id_book]
         del self.library[id_book]
         return book
 
     def display_books(self):
         """ Отображение всей библиотеки. """
+
         print(
-            f"{'id'.ljust(5)}|{'Название'.ljust(70)}|{'Автор'.ljust(50)}|{'Год издания'.ljust(2)}|{'Статус'.ljust(20)}|")
+            f"{'id'.ljust(5)}|{'Название'.ljust(70)}|{'Автор'.ljust(50)}" +
+            f"|{'Год издания'.ljust(10)}|{'Статус'.ljust(20)}|")
         print('_' * 165)
+
         for i in self.library.values():
             print(
-                f'{str(i.id).ljust(5)}|{i.title.ljust(70)}|{i.author.ljust(50)}|{i.year.ljust(10)}|{i.status.ljust(20)}|')
+                f'{str(i.id).ljust(5)}|{i.title.ljust(70)}|{i.author.ljust(50)}' +
+                f'|{i.year.ljust(11)}|{i.status.ljust(20)}|')
             print('_' * 165)
 
     def search_book(self, search: str) -> int:
         """ Поиск ключевого слова в библиотеки. """
-        count_search = 0
+
+        count_search = 0  # Счетчик найденных книг
+
         for i in self.library.values():
             if search in i.display_book():
                 print('поиск:', i)
                 count_search += 1
+
         return count_search
 
     def update_book(self, id_book: int, status: str) -> str:
         """ Изменение статуса объекта Book"""
+
         if self.library[id_book].status == status:
             return f'Статус книги неизменён, так как книга и так уже {status}\n{self.library[id_book]}'
 
@@ -91,6 +104,7 @@ class Library:
     @staticmethod
     def check_status(status: str) -> str:
         """ Проверка правильного значения для "status". """
+
         if 'в наличии' == status.lower():
             status = 'В наличии'
         elif 'выдана' == status.lower():
@@ -101,6 +115,7 @@ class Library:
 
     def check_id_book(self, id_book: str) -> int:
         """ Проверка индекса """
+
         try:
             id_book = int(id_book)
             if id_book not in self.library:
