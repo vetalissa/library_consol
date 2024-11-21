@@ -1,6 +1,10 @@
 from libook import Library
+import serializers
 
 library = Library()
+
+print('Загружаем библиотеку...\nОжидайте...')
+serializers.load_json_library(library)
 
 command = '''Список команд:                                                                                                                                        
     Добавить книгу в библиотеку: "Добавить"                                                                                                                            

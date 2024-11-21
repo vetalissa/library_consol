@@ -1,5 +1,5 @@
 import json
-from libook import Book
+from libook import Book, Library
 
 
 def create_json_library():
@@ -12,10 +12,19 @@ def create_json_library():
         json.dump({}, file_data, ensure_ascii=False, indent=4)
 
 
-def load_json_library(library):
+def load_json_library(library: Library):
     """
     Загрузка книг из json.
     """
+    data = unloading_json()  # Выгружаем данные из файла
+
+    for book in data.values():
+        book_title = book['title']
+        book_author = book['author']
+        book_year = book['year']
+
+        # Создаем экземпляр класса Book и добавляем в Library
+        library.add_book(book_title, book_author, book_year)
 
 
 def add_json_library(book_instance: Book):
@@ -52,3 +61,4 @@ def loading_in_json(data):
     """
     with open('data.json', 'w') as json_data:
         json.dump(data, json_data, ensure_ascii=False, indent=4)
+
