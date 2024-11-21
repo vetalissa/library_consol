@@ -22,7 +22,12 @@ class Book:
     def __setattr__(self, key, value):
         """ Проверка корректности атрибута 'year'. """
         if key == 'year':
+            if not all(val.isdigit() for val in value):
+                print('_' * 165)
+                print("Неверный год, он может быть с 1445 по наше время и только цифры!")
+                raise TypeError
             if 1445 > int(value) or int(value) > datetime.now().year:
+                print('_' * 165)
                 print("Неверный год, он может быть с 1445 по наше время.")
                 raise TypeError
         object.__setattr__(self, key, value)
