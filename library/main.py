@@ -53,6 +53,36 @@ def library_remove_book():
     """
     global command_text, yes_or_no
 
+    print('_' * 165)
+    input_id_book = input('Напишите индекс(номер) книги, которую вы хотите удалить:\n')
+
+    if input_id_book == 'МЕНЮ':  # Выход в меню
+        command_text = 'МЕНЮ'
+        return False
+
+    try:
+        id_book = library.check_id_book(input_id_book)  # Проверка корректности id
+
+        you_sure = input(f'Вы уверены, что хотите удалить книгу?(Да/Нет)\n {library.library[id_book]}\n')
+        if 'да' != you_sure.lower():
+            print('Удаление отменено')
+            return False
+
+        book = library.delete_book(id_book=id_book)
+
+
+        print('_' * 165)
+        print(f'Книга: {book}\nБыла успешна удалена!')
+
+        yes_or_no = input('Удалить еще одну книгу?(Да/Нет)\n')
+
+    except KeyError:
+        print(
+            f'Индекс {input_id_book} отсутствует у нас в библиотеке.\nПопробуйте ввести другой индекс и/или проверьте его в библиотеке.')
+    except ValueError:
+        print(
+            'Такого индекса не существует, проверьте чтобы введенный индекс был числом\nи присутствовал у нас в библиотеке.')
+
 
 def library_update_book():
     """
