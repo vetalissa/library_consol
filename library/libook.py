@@ -69,7 +69,7 @@ class Library:
         """ Поиск ключевого слова в библиотеки. """
         count_search = 0
         for i in self.library.values():
-            if search in i.list_display():
+            if search in i.display_book():
                 print('поиск:', i)
                 count_search += 1
         return count_search

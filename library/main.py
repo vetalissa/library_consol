@@ -141,6 +141,19 @@ def library_search_book():
     """
     global command_text, yes_or_no
 
+    input_search = input('Введите название, автора или год издания для поиска:\n')
+
+    if input_search == 'МЕНЮ':  # Выход в меню
+        command_text = 'МЕНЮ'
+        return False
+
+    print('_' * 165)
+    response = library.search_book(input_search)  # Вывод найденных совпадений -> количество ответов.
+    print(f'Найдено:{response}')  # Вывод количество ответов
+    print('_' * 165)
+
+    yes_or_no = input('Искать ещё?(Да/Нет)\n')
+
 
 
 # Бесконечная работа консоли
