@@ -18,6 +18,34 @@ def library_add_book():
     """
     global command_text, yes_or_no
 
+    book_val = {
+        'book_title': ['Введите название книги: ', ''],
+        'book_author': ['Введите автора: ', ''],
+        'book_year': ['Введите год издания: ', '']
+    }
+
+    try:
+        for key in book_val:
+            val = input(book_val[key][0])
+
+            if val == 'МЕНЮ':  # Выход в меню
+                command_text = 'МЕНЮ'
+                return False
+
+            book_val[key][1] = val
+        else:
+            book = library.add_book(book_val['book_title'][1], book_val['book_author'][1],
+                                    book_val['book_year'][1])
+
+            print('_' * 165)
+            print(f'{book}\nКнига успешна добавлена в библиотеку.')
+
+            yes_or_no = input('Добавить еще одну книгу?(Да/Нет)\n')
+
+    except TypeError:
+        print('Вы ввели неверные данные...\nПопробуйте ещё раз.')
+        print('_' * 165)
+
 
 def library_remove_book():
     """
@@ -50,7 +78,7 @@ while True:
     command_text = input("Введите команду: ")
     yes_or_no = 'да' # Флаг работы команды.
 
-    while True:
+    while True and yes_or_no.lower() == 'да':
 
         if command_text.lower() == 'добавить':
             library_add_book()
