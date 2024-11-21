@@ -83,7 +83,8 @@ class Library:
 
         return f'Статус книги изменён на "{status}"\n{self.library[id_book]}'
 
-    def check_status(self, status):
+    @staticmethod
+    def check_status(status: str) -> str:
         """ Проверка правильного значения для "status". """
         if 'в наличии' == status.lower():
             status = '"В наличии"'
@@ -93,7 +94,7 @@ class Library:
             raise ValueError
         return status
 
-    def check_id_book(self, id_book):
+    def check_id_book(self, id_book: str) -> int:
         """ Проверка индекса """
         try:
             id_book = int(id_book)
