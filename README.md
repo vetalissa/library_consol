@@ -65,38 +65,38 @@ python3 main.py
 ### Старт
 
 При запуске, вам нужно указать: хотите ли вы использовать пустую библиотеку или закачать данные из фала json.
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/start.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/start.png)
 
 ### Команды и как они работаю:
 
 Для того чтобы удобно пользоваться приложением, существуют ключевые слова. Вам достаточно их написать и следовать дальнейшим указаниям.
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/menu.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/menu.png)
 
 ### Ошибки
 
 Если где-то Вы совершили ошибку, вам высветиться специальное окошко, в котором будет прописано, что случилось.
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/err.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/err.png)
 
 ### Предупреждение
 
 Если вы совершаете удаление или изменение статуса, вам предупредят, об уточнение указанных действий.
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/var.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/var.png)
 
 ### Вид Библиотеки
 
 Вот так выглядит вывод всех книг при команде `Список`:
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/list.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/list.png)
 
 ### Добавление книг
 
 Вот так выглядит добавление книг при команде `Добавить`:
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/ad.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/ad.png)
 
 ### Вид результата поиска
 
 Поиск ищет указанный текст в title, author, year.
 Вот так выглядит вывод найденных совпадений при команде `Поиск`:
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/se.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/se.png)
 
 
 ### Выход
