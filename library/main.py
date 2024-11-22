@@ -2,11 +2,46 @@ import serializers
 from libook import Library
 
 library = Library()
+name_file = 'data.json'
 
-print('Загружаем библиотеку...\nОжидайте...')
 
-# Выгружаем из файла data.json все книги
-serializers.load_json_library(library)
+def hello():
+    """
+    Функция старта, позволяющая работать с уже имеющемся файлом json или создать новый.
+    :return:
+    """
+    global name_file
+
+    print('Приветствуем Вас в библиотеке!\n'
+          'Вы бы хотели продолжить работу с имеющейся библиотекой или создать пустую?\n')
+    flag_start = False
+
+    while flag_start != True:
+        answer = input('Напишите:\n '
+                       '"НОВАЯ", если хотите создать пустую библиотеку\n '
+                       '"БИБ", если хотите использовать заполненную библиотеку с книгами\n\n'
+                       'Ваш ответ: ')
+
+        if answer == 'НОВАЯ':
+            name_file = 'data2.json'
+
+            # Создаем новый пустой файл json
+            serializers.create_json_library(name_file)
+
+            flag_start = True
+        elif answer == 'БИБ':
+            print('Файл json должен называться "data.json" и находиться в корне проекта')
+            print('Загружаем библиотеку...\nОжидайте...')
+
+            # Выгружаем из файла data.json все книги
+            serializers.load_json_library(name_file, library)
+
+            flag_start = True
+        else:
+            print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+            print("Такой команды не существует.")
+            print('<!>' * 55 + '\n')
+
 
 command = '''Список команд:
     Добавить книгу в библиотеку: "Добавить"
@@ -15,8 +50,6 @@ command = '''Список команд:
     Изменить статус книги: "Статус"
     Найти книгу: "Поиск
     Для выхода в главное меню напишите: "МЕНЮ" обязательно капсом!'''
-
-print('Приветствуем Вас в библиотеке!\n')
 
 
 def library_add_book():
@@ -46,7 +79,7 @@ def library_add_book():
             book = library.add_book(book_val['book_title'][1], book_val['book_author'][1],
                                     book_val['book_year'][1])
 
-            serializers.add_json_library(book)  # Добавление в файл data.json новой книги
+            serializers.add_json_library(name_file, book)  # Добавление в файл data.json новой книги
 
             print('_' * 165)
             print(f'{book}\nКнига успешна добавлена в библиотеку.')
@@ -88,7 +121,7 @@ def library_remove_book():
 
         book = library.delete_book(id_book=id_book)
 
-        serializers.delete_json_library(id_book)  # Удаление из файла data.json книги
+        serializers.delete_json_library(name_file, id_book)  # Удаление из файла data.json книги
 
         print('_' * 165)
         print(f'Книга: {book}\nБыла успешна удалена!')
@@ -203,6 +236,7 @@ def library_search_book():
     yes_or_no = input('Искать ещё?(Да/Нет)\n')
 
 
+hello()
 # Бесконечная работа консоли
 while True:
     print('_' * 165)
