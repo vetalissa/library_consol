@@ -20,20 +20,34 @@ class Book:
         self.status = status
 
     def __setattr__(self, key, value):
-        """ Проверка корректности атрибута 'year'. """
+        """ Проверка корректности присваемых значений. """
+
+        if key != 'id':
+            if len(value) == 0:
+                print('_' * 165 + '\n')
+                print("INFO: Пустые значения недопустимы!")
+                self.__reset_id()
+                raise TypeError
 
         if key == 'year':
             if not all(val.isdigit() for val in value):
-                print('_' * 165)
-                print("Неверный год, он может быть с 1445 по наше время и только цифры!")
+                print('_' * 165 + '\n')
+                print("INFO: Неверный год, он может содержать только цифры и быть с 1445 по наше время!")
+                self.__reset_id()
                 raise TypeError
 
             if 1445 > int(value) or int(value) > datetime.now().year:
-                print('_' * 165)
-                print("Неверный год, он может быть с 1445 по наше время.")
+                print('_' * 165 + '\n')
+                print("INFO: Неверный год, он может быть с 1445 по наше время.")
+                self.__reset_id()
                 raise TypeError
 
         object.__setattr__(self, key, value)
+
+    @classmethod
+    def __reset_id(cls):
+        if cls.__id != 0:
+            cls.__id -= 1
 
     def __str__(self):
         return f'#{self.id}: "{self.title}", {self.author}, {self.year} год, {self.status}'
