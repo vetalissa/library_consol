@@ -9,7 +9,8 @@ command = '''Список команд:
     Удалить книгу из библиотеки: "Удалить"
     Изменить статус книги: "Статус"
     Найти книгу: "Поиск
-    Для выхода в главное меню напишите: "МЕНЮ" обязательно капсом!'''
+    Для выхода в главное меню напишите: "МЕНЮ" обязательно капсом!
+    Для выхода из приложения напишите: "ВЫХОД" обязательно капсом!'''
 
 
 def hello():
@@ -35,6 +36,7 @@ def hello():
             serializers.create_json_library(name_file)
 
             flag_start = True
+
         elif answer == 'БИБ':
             print('Файл json должен называться "data.json" и находиться в корне проекта')
             print('Загружаем библиотеку...\nОжидайте...')
@@ -73,7 +75,8 @@ def library_add_book():
 
             book_val[key][1] = val
         else:
-            book = library.add_book(book_val['book_title'][1], book_val['book_author'][1],
+            book = library.add_book(book_val['book_title'][1],
+                                    book_val['book_author'][1],
                                     book_val['book_year'][1])
 
             serializers.add_json_library(name_file, book)  # Добавление в файл data.json новой книги
@@ -121,6 +124,7 @@ def library_remove_book():
 
         print('_' * 165)
         print(f'Книга: {book}\nБыла успешна удалена!')
+        print('_' * 165)
 
         yes_or_no = input('Удалить еще одну книгу?(Да/Нет)\n')
 
