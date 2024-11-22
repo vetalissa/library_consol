@@ -65,31 +65,33 @@ python3 main.py
 ### Старт
 
 При запуске, вам нужно указать: хотите ли вы использовать пустую библиотеку или закачать данные из фала json.
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/start.png)
 
 ### Команды и как они работаю:
 
 Для того чтобы удобно пользоваться приложением, существуют ключевые слова. Вам достаточно их написать и следовать дальнейшим указаниям.
-
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/menu.png)
 
 ### Ошибки
 
 Если где-то Вы совершили ошибку, вам высветиться специальное окошко, в котором будет прописано, что случилось.
-
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/err.png)
 
 ### Предупреждение
 
 Если вы совершаете удаление или изменение статуса, вам предупредят, об уточнение указанных действий.
-
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/var.png)
 
 ### Вид Библиотеки
 
 Вот так выглядит вывод всех книг при команде `Список`:
-
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/list.png)
 
 ### Вид результата поиска
 
 Поиск ищет указанный текст в title, author, year.
 Вот так выглядит вывод найденных совпадений при команде `Поиск`:
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/se.png)
 
 
 ### Выход
