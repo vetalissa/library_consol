@@ -87,6 +87,11 @@ python3 main.py
 Вот так выглядит вывод всех книг при команде `Список`:
 ![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/list.png)
 
+### Добавление книг
+
+Вот так выглядит добавление книг при команде `Добавить`:
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/b41a6ded7ab4dffbc22d36cbfbaa43469a3e3002/ad.png)
+
 ### Вид результата поиска
 
 Поиск ищет указанный текст в title, author, year.
