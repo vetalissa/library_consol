@@ -16,11 +16,11 @@ def create_json_library(name_file: str):
 
 def load_json_library(name_file: str, library: Library):
     """
-    Загрузка книг из json.
+    Загрузка книг из json, дополнительно происходит перезапись файла для корректной работы.
     """
 
     data = unloading_json(name_file)  # Выгружаем данные из файла
-
+    data2 = {}
     for book in data.values():
         book_title = book['title']
         book_author = book['author']
@@ -28,7 +28,12 @@ def load_json_library(name_file: str, library: Library):
         book_status = book['status']
 
         # Создаем экземпляр класса Book и добавляем в Library
-        library.add_book(book_title, book_author, book_year, book_status)
+        book_instance = library.add_book(book_title, book_author, book_year, book_status)
+        data2[book_instance.id] = book_instance.__dict__
+
+    # Перезаписываем json файл
+    create_json_library(name_file)
+    loading_in_json(name_file, data2)
 
 
 def add_json_library(name_file: str, book_instance: Book):
@@ -92,6 +97,6 @@ def loading_in_json(name_file: str, data: dict):
     """
     Загружаем данные в файла json.
     """
-    print(type(data))
+
     with open(name_file, 'w') as json_data:
         json.dump(data, json_data, ensure_ascii=False, indent=4)
