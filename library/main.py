@@ -15,7 +15,6 @@ command = '''Список команд:
 def hello():
     """
     Функция старта, позволяющая работать с уже имеющемся файлом json или создать новый.
-    :return:
     """
     global name_file
 
@@ -96,7 +95,6 @@ def library_remove_book():
     """
     global command_text, yes_or_no
 
-    # print('_' * 165)
     input_id_book = input('Напишите индекс(номер) книги, которую вы хотите удалить:\n')
 
     if input_id_book == 'МЕНЮ':  # Выход в меню
@@ -106,10 +104,10 @@ def library_remove_book():
     try:
         id_book = library.check_id_book(input_id_book)  # Проверка корректности id
 
-        print('\n' + '<>' * 40 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 40)
+        print('\n' + '<>' * 6 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 69)
         you_sure = input('Вы уверены, что хотите удалить книгу?(Да/Нет)\n'
                          f'{library.library[id_book]}\n')
-        print('<>' * 85 + '\n')
+        print('<>' * 83 + '\n')
 
         if 'да' != you_sure.lower():
             print('Удаление отменено')
@@ -144,7 +142,7 @@ def library_remove_book():
 
 def library_update_book():
     """
-        Функция изменения статуса книги(Book).
+    Функция изменения статуса книги(Book).
     """
     global command_text, yes_or_no
 
@@ -179,10 +177,10 @@ def library_update_book():
     while f2 != True and f1 == True:
         # Будем вводить status пока не введем достоверный status или не решим выйти("Меню").
 
-        print('\n' + '<>' * 40 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 40)
+        print('\n' + '<>' * 6 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 69)
         print('Вы хотите изменить статус книги:\n'
               f'{library.library[id_book]}')
-        print('<>' * 85 + '\n')
+        print('<>' * 83 + '\n')
 
         try:
             input_status = input('Напишите новый статус, он может быть только "В наличии" или "Выдана"\n'
@@ -192,7 +190,7 @@ def library_update_book():
                 command_text = 'МЕНЮ'
                 return False
 
-            if input_status.lower() == 'назад':
+            if input_status.lower() == 'назад':  # Возвращение к вводу id
                 f1 = False
                 return False
 
@@ -219,6 +217,7 @@ def library_search_book():
         Функция поиска книги(Book) по ключевому слову.
     """
     global command_text, yes_or_no
+
     print('\n' + '_' * 82 + 'ПОИСК' + '_' * 82)
     input_search = input('Введите название, автора или год издания для поиска:\n')
 
@@ -234,13 +233,13 @@ def library_search_book():
     yes_or_no = input('Искать ещё?(Да/Нет)\n')
 
 
-hello() # Создание или закачка библиотеки из файла json
+hello()  # Создание или закачка библиотеки из файла json
+
 # Бесконечная работа консоли
 while True:
     print('_' * 165)
     print(command)
     print('_' * 165)
-
     command_text = input("Введите команду: ")
     yes_or_no = 'да'  # Флаг работы команды.
 
@@ -262,7 +261,7 @@ while True:
         elif command_text.lower() == 'поиск':
             library_search_book()
 
-        elif command_text == 'МЕНЮ':
+        elif command_text in ('МЕНЮ', 'ВЫХОД'):
             print('\n' * 50)
             break
 
@@ -270,4 +269,12 @@ while True:
             print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
             print("Такой команды не существует.")
             print('<!>' * 55 + '\n')
+            break
+
+    if command_text == 'ВЫХОД':
+        # Команда для выхода и закрытия приложения
+
+        answer = input('Вы уверены что хотите выйти из Библиотеки?(ДА/НЕТ)')
+        if answer == 'ДА':
+            print('До свидания!')
             break
