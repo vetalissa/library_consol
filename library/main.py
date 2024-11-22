@@ -121,6 +121,7 @@ def library_update_book():
 
     while f1 != True:
         # Будем вводить id пока не введем достоверный id или не решим выйти("Меню").
+        print('_' * 165)
         input_id_book = input('Напишите индекс(номер) книги у которой хотите изменить статус:\n')
         try:
 
@@ -144,18 +145,31 @@ def library_update_book():
 
     while f2 != True and f1 == True:
         # Будем вводить status пока не введем достоверный status или не решим выйти("Меню").
+
+        print('\n' + '<>' * 40 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 40)
+        print('Вы хотите изменить статус книги:\n'
+              f'{library.library[id_book]}')
+        print('<>' * 85 + '\n')
+
         try:
-            input_status = input('Напишите новый статус, он может быть только "В наличии" или "Выдана"\n')
+            input_status = input('Напишите новый статус, он может быть только "В наличии" или "Выдана"\n'
+                                 '~ Если вы перепутали id -> "Назад"\n')
 
             if input_status == 'МЕНЮ':  # Выход в меню
                 command_text = 'МЕНЮ'
                 return False
+
+            if input_status.lower() == 'назад':
+                f1 = False
+                return False
+
 
             status = library.check_status(input_status)  # Проверка корректности status
             answer_update = library.update_book(id_book, status)  # Обновление статуса
 
             serializers.update_json_library(id_book, status)  # Изменение статуса книги в файле data.json
 
+            print('_' * 165)
             print(answer_update)  # Вывод обновленной книги
             print('_' * 165)
 
