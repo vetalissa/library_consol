@@ -38,7 +38,7 @@ class Book:
     def __str__(self):
         return f'#{self.id}: "{self.title}", {self.author}, {self.year} год, {self.status}'
 
-    def display_book(self):
+    def display_book(self) -> str:
         """ Функция отображения книги в виде строки. """
         return ' '.join([self.title.lower(), self.author.lower(), self.year])
 
@@ -65,7 +65,7 @@ class Library:
         del self.library[id_book]
         return book
 
-    def display_books(self):
+    def display_books(self) -> None:
         """ Отображение всей библиотеки. """
 
         print(
@@ -95,7 +95,7 @@ class Library:
         return count_search
 
     def update_book(self, id_book: int, status: str) -> str:
-        """ Изменение статуса объекта Book"""
+        """ Изменение статуса объекта Book. """
 
         if self.library[id_book].status == status:
             return f'Статус книги неизменён, так как книга и так уже {status}\n{self.library[id_book]}'
@@ -117,7 +117,7 @@ class Library:
         return status
 
     def check_id_book(self, id_book: str) -> int:
-        """ Проверка индекса """
+        """ Проверка индекса. """
 
         try:
             id_book = int(id_book)
