@@ -93,3 +93,40 @@ def delete_json_library(name_file: str, id_book: int):
 
     except json.JSONDecodeError as e:
         raise ValueError(f"Ошибка при обработке JSON: {e}")
+
+
+def check_file_name(name_file: str):
+    """
+    Проверка формата названия файла JSON.
+    """
+    if not name_file.endswith('.json'):
+        print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+        print("Файл должен иметь расширение .json.")
+        print('<!>' * 55 + '\n')
+        return False
+    return True
+
+
+def check_file_in_dir(name_file: str, action: str) -> bool:
+    """
+    Проверка существования файла JSON c переданным названием.
+    """
+    file_path = "data_library/" + name_file
+
+    if action == 'load':
+        if os.path.isfile(file_path):
+            return True
+        else:
+            print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+            print('Файла нет в директории "data_library", проверьте что бы файл находился в папке "data_library"!\n')
+            print('<!>' * 55 + '\n')
+            return False
+
+    if action == 'create':
+        if not os.path.isfile(file_path):
+            return True
+        else:
+            print('\n' + '<>' * 6 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 69)
+            print('Файл с таким именем уже есть в директории "data_library", все данные файла будут удалены!')
+            print('<>' * 83 + '\n')
+            return False

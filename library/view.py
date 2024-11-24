@@ -6,7 +6,16 @@ name_file = 'data.json'
 
 def get_file_name(action):
     """ Запрос у пользователя названия файла, и проверка его формата и наличия в директории. """
+    while True:
+        name_file = input("Введите название файла (с расширением .json): ")
 
+        if serializers.check_file_name(name_file):  # Проверка формата .json
+            if serializers.check_file_in_dir(name_file, action):  # Проверка существования файла
+                return name_file
+            elif action == 'create':  # Если файл создается, но уже есть в директории
+                you_sure = input('Вы уверенны, что хотите удалить все данные из файла?(ДА/НЕТ)\n')
+                if you_sure == 'ДА':
+                    return name_file
 
 
 def create_or_load_json():
