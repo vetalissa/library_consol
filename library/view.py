@@ -106,6 +106,7 @@ def library_add_book():
             print('Вы ввели неверные данные...\nПопробуйте ещё раз.')
             print('<!>' * 55 + '\n')
 
+
 def library_remove_book():
     """
     Функция удаление книги(Book) из библиотеки(Library).
@@ -144,6 +145,53 @@ def library_remove_book():
             except Exception as e:
                 print(f'\n{"<!" * 3} ОШИБКА {"<!" * 50}')
                 print(f'Ошибка при удалении книги: {str(e)}.')
+                print('<!>' * 55 + '\n')
+
+
+def library_update_book():
+    """
+    Функция изменения статуса книги(Book).
+    """
+
+    while True:
+        # Будем вводить id пока не введем достоверный id или не решим выйти("Меню")
+        id_book = get_id_book()
+
+        if not id_book:  # Выход в меню
+            return
+
+        print('\n' + '<>' * 6 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 69)
+        print('Вы хотите изменить статус книги:\n'
+              f'{library.library[id_book]}')
+        print('<>' * 83 + '\n')
+
+        while True:
+            # Будем вводить status пока не введем достоверный status или не решим выйти("Меню").
+            input_status = input('Напишите новый статус, он может быть только "В наличии" или "Выдана"\n'
+                                 '~ Если вы перепутали id -> "Назад"\n')
+
+            if input_status == 'МЕНЮ':  # Выход в меню
+                return
+
+            if input_status.lower() == 'назад':  # Возвращение к вводу id
+                break
+            try:
+                status = library.check_status(input_status)  # Проверка корректности status
+                answer_update = library.update_book(id_book, status)  # Обновление статуса
+
+                serializers.update_json_library(name_file, id_book, status)  # Изменение статуса книги в файле data.json
+
+                print('_' * 165)
+                print(answer_update)  # Вывод обновленной книги
+                print('_' * 165)
+
+                yes_or_no = input('Изменить ещё статус?(Да/Нет)\n')
+                if 'нет' == yes_or_no.lower():
+                    return
+                break
+            except ValueError:
+                print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+                print(f'Статус указан неверно! Укажите правильно: "В наличии" или "Выдана"')
                 print('<!>' * 55 + '\n')
 
 
