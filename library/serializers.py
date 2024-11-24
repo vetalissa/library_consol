@@ -1,4 +1,5 @@
 import json
+import os
 
 from libook import Book, Library
 
@@ -9,11 +10,17 @@ def manage_json_file(name_file: str, data: dict = None) -> dict:
     Если data не передан, происходит чтение.
     Если data передан, происходит запись.
     """
+    # Папка с файлами JSON
+    directory = "data_library"
+
+    # Полный путь к файлу
+    file_path = os.path.join(directory, name_file)
+
     if data is not None:  # Запись
-        with open(name_file, 'w', encoding='utf-8') as json_data:
+        with open(file_path, 'w', encoding='utf-8') as json_data:
             json.dump(data, json_data, ensure_ascii=False, indent=4)
     else:  # Чтение
-        with open(name_file, 'r', encoding='utf-8') as json_data:
+        with open(file_path, 'r', encoding='utf-8') as json_data:
             return json.load(json_data)
 
 
