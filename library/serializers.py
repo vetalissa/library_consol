@@ -45,8 +45,10 @@ def load_json_library(name_file: str, library: Library):
         # Перезаписываем json файл
         manage_json_file(name_file, data2)
 
-    except FileNotFoundError:
-        raise FileNotFoundError("Файл не найден.")
+    except KeyError:
+        raise ValueError
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Ошибка при обработке JSON: {e}")
 
 
 def add_json_library(name_file: str, book_instance: Book):
