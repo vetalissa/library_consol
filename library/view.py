@@ -195,6 +195,27 @@ def library_update_book():
                 print('<!>' * 55 + '\n')
 
 
+def library_search_book():
+    """
+        Функция поиска книги(Book) по ключевому слову.
+    """
+    while True:
+        print('\n' + '_' * 82 + 'ПОИСК' + '_' * 82)
+        input_search = input('Введите название, автора или год издания для поиска:\n')
+
+        if input_search == 'МЕНЮ':  # Выход в меню
+            return
+
+        print('_' * 165)
+        response = library.search_book(input_search)  # Вывод найденных совпадений -> количество ответов.
+        print(f'Найдено:{response}')  # Вывод количество ответов
+        print('_' * 165)
+
+        yes_or_no = input('Искать ещё книги?(Да/Нет)\n')
+        if 'нет' == yes_or_no.lower():
+            return
+
+
 def get_id_book():
     """ Функция ввода id и проверки корректности id."""
     while True:
