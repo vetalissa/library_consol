@@ -25,12 +25,15 @@ class Book:
         if not value:
             print('_' * 165 + '\n')
             print("INFO: Пустые значения недопустимы!")
+            self.__reset_id()
             raise ValueError("Пустое значение не допускается.")
+
 
         if key == 'year':
             if not value.isdigit() or not (1445 <= int(value) <= datetime.now().year):
                 print('_' * 165 + '\n')
                 print("INFO: Неверный год, он может содержать только цифры и быть с 1445 по наше время!")
+                self.__reset_id()
                 raise ValueError("Неверный год книги.")
 
         object.__setattr__(self, key, value)
