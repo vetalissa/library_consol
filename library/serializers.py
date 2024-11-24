@@ -3,15 +3,18 @@ import json
 from libook import Book, Library
 
 
-def create_json_library(name_file: str):
+def manage_json_file(name_file: str, data: dict = None) -> dict:
     """
-    Создание пустого файла json.
-    Если у вас нет, файла json c книгами, вы можете создать пустой.
-    И с помощью консоли и команды "Добавить" заполнить библиотеку.
+    Управление файлом JSON: чтение или запись.
+    Если data не передан, происходит чтение.
+    Если data передан, происходит запись.
     """
-
-    with open(name_file, 'w', encoding='utf-8') as json_data:
-        json.dump({}, json_data, ensure_ascii=False, indent=4)
+    if data is not None:  # Запись
+        with open(name_file, 'w', encoding='utf-8') as json_data:
+            json.dump(data, json_data, ensure_ascii=False, indent=4)
+    else:  # Чтение
+        with open(name_file, 'r', encoding='utf-8') as json_data:
+            return json.load(json_data)
 
 
 def load_json_library(name_file: str, library: Library):
@@ -19,8 +22,9 @@ def load_json_library(name_file: str, library: Library):
     Загрузка книг из json, дополнительно происходит перезапись файла для корректной работы.
     """
     try:
-        data = unloading_json(name_file)  # Выгружаем данные из файла
-        data2 = {}
+        data = manage_json_file(name_file)  # Выгружаем данные из файла
+        data2 = {}  # Обновленный словарь
+
         for book in data.values():
             book_title = book['title']
             book_author = book['author']
@@ -32,10 +36,10 @@ def load_json_library(name_file: str, library: Library):
             data2[book_instance.id] = book_instance.__dict__
 
         # Перезаписываем json файл
-        create_json_library(name_file)
-        loading_in_json(name_file, data2)
+        manage_json_file(name_file, data2)
+
     except FileNotFoundError:
-        raise FileNotFoundError
+        raise FileNotFoundError("Файл не найден.")
 
 
 def add_json_library(name_file: str, book_instance: Book):
@@ -43,14 +47,14 @@ def add_json_library(name_file: str, book_instance: Book):
     Добавление книг в json.
     """
     try:
-        data = unloading_json(name_file)  # Выгружаем данные из файла
-        data[book_instance.id] = book_instance.__dict__
+        data = manage_json_file(name_file)  # Выгружаем данные из файла
+        data[book_instance.id] = book_instance.__dict__  # Добавляем новую книгу
 
         # Записываем в файл
-        loading_in_json(name_file, data)
+        manage_json_file(name_file, data)
 
     except json.JSONDecodeError as e:
-        print(f"Ошибка при обработке JSON: {e}")
+        raise ValueError(f"Ошибка при обработке JSON: {e}")
 
 
 def update_json_library(name_file: str, id_book: int, status: str):
@@ -58,14 +62,14 @@ def update_json_library(name_file: str, id_book: int, status: str):
     Обновление статуса у книги в json.
     """
     try:
-        data = unloading_json(name_file)  # Выгружаем данные из файла
+        data = manage_json_file(name_file)  # Выгружаем данные из файла
         data[str(id_book)]['status'] = status  # Меняем статус
 
         # Запись в json
-        loading_in_json(name_file, data)
+        manage_json_file(name_file, data)
 
     except json.JSONDecodeError as e:
-        print(f"Ошибка при обработке JSON: {e}")
+        raise ValueError(f"Ошибка при обработке JSON: {e}")
 
 
 def delete_json_library(name_file: str, id_book: int):
@@ -73,32 +77,12 @@ def delete_json_library(name_file: str, id_book: int):
     Удаление книги из json.
     """
     try:
-        data = unloading_json(name_file)  # Выгружаем данные из файла
+        data = manage_json_file(name_file)  # Выгружаем данные из файла
 
-        # Удаление книги
         del data[str(id_book)]
 
-        # Запись в json
-        loading_in_json(name_file, data)
+        # Записываем в файл
+        manage_json_file(name_file, data)
 
     except json.JSONDecodeError as e:
-        print(f"Ошибка при обработке JSON: {e}")
-
-
-def unloading_json(name_file: str) -> dict:
-    """
-    Выгружаем данные из файла json.
-    """
-    with open(name_file) as json_data:
-        data = json.load(json_data)
-
-    return data
-
-
-def loading_in_json(name_file: str, data: dict):
-    """
-    Загружаем данные в файла json.
-    """
-
-    with open(name_file, 'w') as json_data:
-        json.dump(data, json_data, ensure_ascii=False, indent=4)
+        raise ValueError(f"Ошибка при обработке JSON: {e}")
