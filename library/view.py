@@ -147,3 +147,26 @@ def library_remove_book():
                 print('<!>' * 55 + '\n')
 
 
+def get_id_book():
+    """ Функция ввода id и проверки корректности id."""
+    while True:
+        input_id_book = input('Напишите индекс(номер) книги:\n')
+
+        if input_id_book == 'МЕНЮ':  # Выход в меню
+            return False
+
+        try:
+            id_book = library.check_id_book(input_id_book)
+            return id_book
+
+        except KeyError:
+            print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+            print(
+                f'Индекс {input_id_book} отсутствует у нас в библиотеке.\n'
+                'Попробуйте ввести другой индекс и/или проверьте его в библиотеке.')
+            print('<!>' * 55 + '\n')
+
+        except ValueError:
+            print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+            print(f'Неверно указан индекс! "{input_id_book}" не является числом!')
+            print('<!>' * 55 + '\n')
