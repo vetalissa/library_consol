@@ -22,25 +22,16 @@ class Book:
     def __setattr__(self, key, value):
         """ Проверка корректности присваемых значений. """
 
-        if key != 'id':
-            if len(value) == 0:
-                print('_' * 165 + '\n')
-                print("INFO: Пустые значения недопустимы!")
-                self.__reset_id()
-                raise TypeError
+        if not value:
+            print('_' * 165 + '\n')
+            print("INFO: Пустые значения недопустимы!")
+            raise ValueError("Пустое значение не допускается.")
 
         if key == 'year':
-            if not all(val.isdigit() for val in value):
+            if not value.isdigit() or not (1445 <= int(value) <= datetime.now().year):
                 print('_' * 165 + '\n')
                 print("INFO: Неверный год, он может содержать только цифры и быть с 1445 по наше время!")
-                self.__reset_id()
-                raise TypeError
-
-            if 1445 > int(value) or int(value) > datetime.now().year:
-                print('_' * 165 + '\n')
-                print("INFO: Неверный год, он может быть с 1445 по наше время.")
-                self.__reset_id()
-                raise TypeError
+                raise ValueError("Неверный год книги.")
 
         object.__setattr__(self, key, value)
 
