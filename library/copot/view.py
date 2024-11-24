@@ -1,5 +1,5 @@
-import serializers
-from libook import Library
+from copot import serializers
+from copot.libook import Library
 
 library = Library()
 name_file = 'data.json'

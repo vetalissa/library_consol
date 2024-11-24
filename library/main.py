@@ -1,4 +1,4 @@
-import view
+from copot import view
 
 
 def start():

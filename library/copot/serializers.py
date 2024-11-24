@@ -1,7 +1,7 @@
 import json
 import os
 
-from libook import Book, Library
+from copot.libook import Book, Library
 
 
 def manage_json_file(name_file: str, data: dict = None) -> dict:

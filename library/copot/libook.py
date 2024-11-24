@@ -28,7 +28,6 @@ class Book:
             self.__reset_id()
             raise ValueError("Пустое значение не допускается.")
 
-
         if key == 'year':
             if not value.isdigit() or not (1445 <= int(value) <= datetime.now().year):
                 print('_' * 165 + '\n')
