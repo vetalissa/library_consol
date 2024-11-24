@@ -1,3 +1,4 @@
+import time
 import serializers
 from libook import Library
 
@@ -24,30 +25,39 @@ def hello():
     flag_start = False
 
     while flag_start != True:
-        answer = input('Напишите:\n '
-                       '"НОВАЯ", если хотите создать пустую библиотеку\n '
-                       '"БИБ", если хотите использовать заполненную библиотеку с книгами\n\n'
-                       'Ваш ответ: ')
+        try:
+            answer = input('Напишите:\n '
+                           '"НОВАЯ", если хотите создать пустую библиотеку\n '
+                           '"БИБ", если хотите использовать заполненную библиотеку с книгами\n\n'
+                           'Ваш ответ: ')
 
-        if answer == 'НОВАЯ':
-            name_file = 'data2.json'
+            if answer == 'НОВАЯ':
+                name_file = 'data2.json'
 
-            # Создаем новый пустой файл json
-            serializers.create_json_library(name_file)
+                # Создаем новый пустой файл json
+                serializers.create_json_library(name_file)
 
-            flag_start = True
+                flag_start = True
 
-        elif answer == 'БИБ':
-            print('Файл json должен называться "data.json" и находиться в корне проекта')
-            print('Загружаем библиотеку...\nОжидайте...')
+            elif answer == 'БИБ':
+                print('Файл json должен называться "data.json" и находиться в корне проекта')
+                time.sleep(2)
+                print('Загружаем библиотеку...\nОжидайте...')
+                time.sleep(2)
 
-            # Выгружаем из файла data.json все книги
-            serializers.load_json_library(name_file, library)
+                # Выгружаем из файла data.json все книги
+                serializers.load_json_library(name_file, library)
 
-            flag_start = True
-        else:
+                flag_start = True
+            else:
+                print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
+                print("Такой команды не существует.")
+                print('<!>' * 55 + '\n')
+
+        except FileNotFoundError:
             print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
-            print("Такой команды не существует.")
+            print('Файла нет в директории, проверьте что бы файл находился в папке с приложением!\n'
+                  'Файл должен называться "data.json"')
             print('<!>' * 55 + '\n')
 
 
