@@ -105,3 +105,45 @@ def library_add_book():
             print('\n' + '<!>' * 3 + 'ОШИБКА' + '<!>' * 50)
             print('Вы ввели неверные данные...\nПопробуйте ещё раз.')
             print('<!>' * 55 + '\n')
+
+def library_remove_book():
+    """
+    Функция удаление книги(Book) из библиотеки(Library).
+    """
+    while True:
+        # Будем вводить id пока не введем достоверный id или не решим выйти("Меню")
+        id_book = get_id_book()
+
+        if not id_book:  # Выход в меню
+            return
+
+        # Согласие на удаление
+        print('\n' + '<>' * 6 + 'ПРЕДУПРЕЖДЕНИЕ' + '<>' * 69)
+        you_sure = input('Вы уверены, что хотите удалить книгу?(Да/Нет)\n'
+                         f'{library.library[id_book]}\n').lower()
+        print('<>' * 83 + '\n')
+
+        if 'да' != you_sure:
+            print('Удаление отменено')
+            print('_' * 165)
+            yes_or_no = input('Хотите удалить другую книгу?(Да/Нет)\n')
+            if 'нет' == yes_or_no.lower():
+                break
+        else:
+            book = library.delete_book(id_book=id_book)
+
+            try:
+                serializers.delete_json_library(name_file, id_book)  # Удаление книги из файла JSON
+                print('_' * 165)
+                print(f'Книга "{book}" была успешно удалена!')
+                print('_' * 165)
+                yes_or_no = input('Хотите удалить еще одну книгу?(Да/Нет)\n').lower()
+                if 'да' != yes_or_no:
+                    return
+
+            except Exception as e:
+                print(f'\n{"<!" * 3} ОШИБКА {"<!" * 50}')
+                print(f'Ошибка при удалении книги: {str(e)}.')
+                print('<!>' * 55 + '\n')
+
+
