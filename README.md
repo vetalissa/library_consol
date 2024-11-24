@@ -65,7 +65,7 @@ python3 main.py
 ### Старт
 
 При запуске, вам нужно указать: хотите ли вы использовать пустую библиотеку или закачать данные из фала json.
-![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/efe25b7e8103df1bd6f84ac4c72e26c91991dbab/start.png)
+![alt text](https://raw.githubusercontent.com/vetalissa/library_consol/85a9c92007305861ee31e57493642fd1b1d7149c/start.png)
 
 ### Команды и как они работаю:
 
